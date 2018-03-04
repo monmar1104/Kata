@@ -105,11 +105,22 @@ public class Kata {
     public static int dontGiveMeFive(int start, int end) {
         int count = 0;
         for (int i = start; i <= end; i++) {
-            if (!(""+i).contains("5")) {
+            if (!("" + i).contains("5")) {
                 count++;
             }
         }
         return count;
+    }
+
+    public static int getCount(String str) {
+
+        return str.replaceAll("(?i)[^aeiou]", "").length();
+//        int vowelsCount = str.length();
+//        String[] chars = {"a", "e", "i", "o", "u"};
+//        for (String c : chars) {
+//            str = str.replace(c, "");
+//        }
+//        return vowelsCount-str.length();
     }
 
 }

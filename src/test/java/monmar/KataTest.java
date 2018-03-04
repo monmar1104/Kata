@@ -80,4 +80,14 @@ public class KataTest {
         assertEquals(8, Kata.dontGiveMeFive(1,9));
         assertEquals(12, Kata.dontGiveMeFive(4,17));
     }
+
+    @Test
+    public void testCase1() {
+        assertEquals("Nope!", 5, kata.getCount("abracadabra"));
+    }
+
+    @Test
+    public void testCase2() {
+        assertEquals("Nope!", 11, kata.getCount("abra   cadabra  aafsdeeee"));
+    }
 }
