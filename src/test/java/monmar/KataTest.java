@@ -178,4 +178,6 @@ public class KataTest {
         testing(Kata.scramble("commas","commas"),true);
         testing(Kata.scramble("sammoc","commas"),true);
     }
+
+
 }
