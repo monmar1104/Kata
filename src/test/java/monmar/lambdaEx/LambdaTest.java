@@ -1,6 +1,7 @@
 package monmar.lambdaEx;
 
 import monmar.lambdaEx.Student;
+import org.hamcrest.Matcher;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import static org.hamcrest.core.Is.is;
 
 public class LambdaTest {
     @Test
-    public void checkStudentsAverageAge(){
+    public void checkStudentsAverageAge() {
         List<Student> studentList = new ArrayList<>();
         studentList.add(new Student("Marcin", "Pastwa", 41, Student.Gender.MAN));
         studentList.add(new Student("Monika", "Pastwa", 39, Student.Gender.WOMAN));
@@ -22,7 +23,7 @@ public class LambdaTest {
     }
 
     @Test
-    public void checkStudentWomanAverageAge(){
+    public void checkStudentWomanAverageAge() {
         List<Student> studentList = new ArrayList<>();
         studentList.add(new Student("Marcin", "Pastwa", 41, Student.Gender.MAN));
         studentList.add(new Student("Monika", "Pastwa", 39, Student.Gender.WOMAN));
@@ -31,4 +32,13 @@ public class LambdaTest {
 
     }
 
+    @Test
+    public void checkStudentSumAge() {
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student("Marcin", "Pastwa", 41, Student.Gender.MAN));
+        studentList.add(new Student("Monika", "Pastwa", 39, Student.Gender.WOMAN));
+        studentList.add(new Student("Marta", "Pastwa", 16, Student.Gender.WOMAN));
+
+        assertThat(Student.getStudentSumAge(studentList), is(96));
+    }
 }

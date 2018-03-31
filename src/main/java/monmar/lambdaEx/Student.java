@@ -59,4 +59,8 @@ public class Student {
     public static Double getAverageAgeByGender(List<Student> studentList, Gender gender) {
         return studentList.stream().filter(s ->s.getGender()==gender).mapToInt(s ->s.age).average().getAsDouble();
     }
+
+    public static Integer getStudentSumAge(List<Student> studentList) {
+        return studentList.stream().mapToInt(s ->s.getAge()).reduce(Integer::sum).orElse(0);
+    }
 }
