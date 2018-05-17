@@ -5,19 +5,33 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Validate {
 
+    public static boolean validate(final String n){
+        if (n == null || n.isEmpty()) return false;
+        boolean x = true;
+        int sum = 0;
+        int temp = 0;
 
-    public static boolean validate(String n){
-        AtomicBoolean doubleValue = new AtomicBoolean(n.length() % 2 == 0);
-        int sum = n.chars()
-                .map(x -> {
-                    int y = x - '0';
-                    int z = doubleValue.getAndSet(!doubleValue.get()) ? ((y * 2) > 9 ? (y * 2) - 9 : (y * 2)) : y;
-                    return z;
-                })
-                .sum();
+        for (int i = n.length() - 1; i >= 0; i--) {
+            temp = n.charAt(i) - '0';
+            sum += (x = !x) ? temp > 4 ? temp * 2 - 9 : temp * 2 : temp;
+        }
+
         return sum % 10 == 0;
-
     }
+
+//
+//    public static boolean validate(String n){
+//        AtomicBoolean doubleValue = new AtomicBoolean(n.length() % 2 == 0);
+//        int sum = n.chars()
+//                .map(x -> {
+//                    int y = x - '0';
+//                    int z = doubleValue.getAndSet(!doubleValue.get()) ? ((y * 2) > 9 ? (y * 2) - 9 : (y * 2)) : y;
+//                    return z;
+//                })
+//                .sum();
+//        return sum % 10 == 0;
+//
+//    }
 
 //    public static boolean validate(String n){
 //        int sum=0;
