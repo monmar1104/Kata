@@ -1,9 +1,15 @@
 package monmar.lambdaEx;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Student {
 
+
+    private static Logger logger = LoggerFactory.getLogger(Student.class);
     private String name;
     private String surename;
     private int age;
@@ -62,5 +68,23 @@ public class Student {
 
     public static Integer getStudentSumAge(List<Student> studentList) {
         return studentList.stream().mapToInt(s ->s.getAge()).reduce(Integer::sum).orElse(0);
+    }
+
+    public static Integer getDoubleAgeSum(List<Student> students){
+//        return students.stream().mapToInt(s -> s.age).reduce((a,b) -> a * b).orElse(0);
+        return students.stream().mapToInt(s -> s.age).sum();
+    }
+
+
+    public static void main(String[] args) {
+        List<Student> studentList = new ArrayList<>();
+        studentList.add(new Student("Marcin", "Pastwa", 41, Student.Gender.MAN));
+        studentList.add(new Student("Monika", "Pastwa", 39, Student.Gender.WOMAN));
+        studentList.add(new Student("Marta", "Pastwa", 16, Student.Gender.WOMAN));
+        System.out.println(getDoubleAgeSum(studentList));
+
+        int intArrays = Arrays.asList(29,30,21,18).parallelStream().reduce(2, (s1, s2) -> s1 * s2, (p, q) -> p + q);
+        int sumAge = studentList.stream().mapToInt(s -> s.age).reduce(100, Integer::sum);
+        System.out.println("Suma wieku: "+sumAge);
     }
 }

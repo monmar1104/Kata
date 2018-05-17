@@ -41,4 +41,5 @@ public class LambdaTest {
 
         assertThat(Student.getStudentSumAge(studentList), is(96));
     }
+
 }
