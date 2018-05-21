@@ -11,21 +11,51 @@ public class Bowling {
             int score = 0;
             if (arrayOfFrames[i].equals("XXX")) {
                 scores[i] = 30;
-            }
-            else if (arrayOfFrames[i].contains("/")) {
-                scores[i] = 10 + (arrayOfFrames[i + 1].equals("X") ? 10 : getFirstThrow(arrayOfFrames[i + 1]));
-
-            }
-            else if (arrayOfFrames[i].equals("X")) {
-                score+=10;
-                if (i<=7 && arrayOfFrames[i + 1].contains("X") ||arrayOfFrames[i + 1].contains("/") ) {
-                    score+=10;
-                    if (arrayOfFrames[i + 1].contains("X"))
-                    scores[i]=score + (arrayOfFrames[i + 2].contains("X") ? 10 : getFirstThrow(arrayOfFrames[i + 2]));
+            } else if (arrayOfFrames[i].contains("/") && !arrayOfFrames[i].contains("X")) {
+                if (i==9){
+                 scores[i] = 10 + Integer.valueOf(arrayOfFrames[i].split("")[2]);
                 }
-                else if (i>7 && arrayOfFrames[i + 1].contains("X") || arrayOfFrames[i + 1].contains("/")) { scores[i]=30;}
+                else {
+                    scores[i] = 10 + (arrayOfFrames[i + 1].contains("X") ? 10 : getFirstThrow(arrayOfFrames[i + 1]));
+                }
+            } else if (i <= 7 && arrayOfFrames[i].equals("X")) {
+                score += 10;
+                if (arrayOfFrames[i + 1].contains("X")) {
+                    score += 10;
+                    scores[i] = score + (arrayOfFrames[i + 2].contains("X") ? 10 : getFirstThrow(arrayOfFrames[i + 2]));
+                }
+                else if (arrayOfFrames[i + 1].contains("/")) {
+                    scores[i] = score + 10;
+                }
+                else {
+                    scores[i] = score + getDigitsFromString(arrayOfFrames[i + 1]);
+                }
+            } else if (i == 8 && arrayOfFrames[i].equals("X")) {
+                score += 10;
+                if (arrayOfFrames[i + 1].contains("XX")) {
+                    scores[i] = score + 20;
+                } else if (arrayOfFrames[i + 1].contains("/") && !arrayOfFrames[i + 1].contains("X")) {
+                    scores[i] = score + 10;
+                } else if (arrayOfFrames[i + 1].contains("/") && arrayOfFrames[i + 1].contains("X")) {
+                    scores[i] = score + 10 + Integer.valueOf(arrayOfFrames[i + 1].split("")[1]) ;
+                } else if (arrayOfFrames[i + 1].contains("X") && !arrayOfFrames[i + 1].contains("/")) {
+                    scores[i] = score + 10 + Integer.valueOf(arrayOfFrames[i + 1].split("")[1]);
+                } else {
+                    scores[i] = score + getDigitsFromString(arrayOfFrames[i + 1]);
+                }
+            } else if (i == 9 && arrayOfFrames[i].contains("X")) {
+                score += 10;
+                if (arrayOfFrames[i].contains("/")) {
+                    scores[i] = score + 10;
+                }
+                else if (arrayOfFrames[i].contains("XX")) {
+                    scores[i] = score + 10 + Integer.valueOf(arrayOfFrames[i].split("")[2]);
+                }
+                else {
+                    scores[i] = score + Integer.valueOf(arrayOfFrames[i].split("")[1]) + Integer.valueOf(arrayOfFrames[i].split("")[2]);
+                }
             } else {
-                scores[i] = score + getDigitsFromString(arrayOfFrames[i]);
+                scores[i] = getDigitsFromString(arrayOfFrames[i]);
             }
 
         }
