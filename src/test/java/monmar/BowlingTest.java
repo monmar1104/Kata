@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.runners.JUnit4;
 import java.util.Random;
 
+//Ten-Pin Bowling
 
 public class BowlingTest {
 
@@ -107,5 +108,19 @@ public class BowlingTest {
         // assertEquals("expected", "actual");
         System.out.println("Maybe this bowler should put bumpers on...\n ");
         assertEquals(130, Bowling.bowling_score("22 X 9/ X 11 X 90 X 5/ 2/2"));
+    }
+
+    @Test
+    public void BasicTests14() {
+        // assertEquals("expected", "actual");
+        System.out.println("Maybe this bowler should put bumpers on...\n ");
+        assertEquals(150, Bowling.bowling_score("5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/ 5/5"));
+    }
+
+    @Test
+    public void BasicTests15() {
+        // assertEquals("expected", "actual");
+        System.out.println("Maybe this bowler should put bumpers on...\n ");
+        assertEquals(133, Bowling.bowling_score("63 52 8/ 06 X X 3/ 7/ 8/ 53"));
     }
 }
