@@ -2,6 +2,10 @@ package monmar;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import static org.junit.Assert.assertEquals;
 
 public class StreetFighterTest {
@@ -145,15 +149,83 @@ public class StreetFighterTest {
             new String[] {  "Vega",        "", "Fei Long", "Balrog" },
             new String[] {"Blanka",   "Guile",         "", "Chun Li"},
             new String[] {"M.Bison","Zangief",  "Dhalsim", "Sagat"  },
-            new String[] {"Deejay",   "Cammy",         "", "T.Hawk" }
+            new String[] {"Deejay",   "Cammy",         "", "" }
     };
 
     @Test
     public void shouldWorkWithLongerGrid5(){
-        String[] moves = new String[] {"up", "right",  "up", "up", "down", "down","down", "down", "down"};
-        int[] position = new int[] {3,1};
-        String[] solution = new String[] {"Guile", "Chun Li", "Balrog", "Balrog", "Chun Li", "Sagat", "T.Hawk", "Cammy", "Cammy"};
+        String[] moves = new String[] {"right","right", "right", "right", "up", "up", "up"};
+        int[] position = new int[] {5,1};
+        String[] solution = new String[] {"Deejay",   "Cammy","Deejay",   "Cammy", "Zangief", "Guile", "Guile"};
         assertEquals(solution, StreetFighter.superStreetFighterize(fighters5, position, moves));
+    }
+
+    public static String[] mysuperStreetFighterize(String[][] fighters, int[] position, String[] moves) {
+        int ud = position[0];
+        int lr = position[1];
+        List<String> finalList = new ArrayList<String>();
+        for(int i = 0; i < moves.length; i++){
+            switch(moves[i]){
+                case "up":
+                    if((ud>0) && (!fighters[ud-1][lr].equals("")))
+                        ud -= 1;
+                    break;
+                case "down":
+                    if((ud<fighters.length-1) && (!fighters[ud+1][lr].equals("")))
+                        ud += 1;
+                    break;
+                case "left":
+                    while(true){
+                        lr = (lr + fighters[ud].length - 1) % fighters[ud].length;
+                        if(!fighters[ud][lr].equals("")){
+                            break;
+                        }
+                    };
+                    break;
+                case "right":
+                    while(true){
+                        lr = (lr + fighters[ud].length + 1) % fighters[ud].length;
+                        if(!fighters[ud][lr].equals("")){
+                            break;
+                        }
+                    };
+                    break;
+            }
+            finalList.add(fighters[ud][lr]);
+        }
+        return finalList.toArray(new String[0]);
+    }
+
+
+    String[][] fighters6 = new String[][]{
+            new String[] {      "",     "Ryu",  "E.Honda",  "Cammy" },
+            new String[] {"Balrog",     "Ken",  "Chun Li",       "" },
+            new String[] {  "Vega",        "", "Fei Long", "Balrog" },
+            new String[] {"Blanka",   "Guile",         "", "Chun Li"},
+            new String[] {"M.Bison","Zangief",  "Dhalsim", "Sagat"  },
+            new String[] {"Deejay",   "Cammy",         "", "T.Hawk" }
+    };
+
+    @Test
+    public void shouldWorkWithRandomValues(){
+        Random rand = new Random();
+        String[] opts = new String[] { "up", "down", "left", "right" };
+        for(int i=0;i<30;i++){
+            int num_moves = rand.nextInt(30) + 10;
+            String[] moves = new String[num_moves];
+            for(int j=0;j<num_moves;j++){
+                moves[j] = opts[rand.nextInt(opts.length)];
+                //System.out.println(moves[j]);
+            }
+            int[] position;
+            while(true){
+                position = new int[]{rand.nextInt(fighters6.length-1),rand.nextInt(fighters6[0].length-1)};
+                if(!(fighters6[position[0]][position[1]]).equals("")){
+                    break;}
+            }
+            String[] solution = StreetFighterTest.mysuperStreetFighterize(fighters6, position, moves);
+            assertEquals(solution,  StreetFighter.superStreetFighterize(fighters6, position, moves));
+        }
     }
 
 }
