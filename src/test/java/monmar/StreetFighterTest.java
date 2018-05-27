@@ -137,4 +137,23 @@ public class StreetFighterTest {
         String[] solution = new String[] {"Guile", "Blanka", "M.Bison", "Zangief", "Dhalsim", "Sagat", "M.Bison", "Deejay", "T.Hawk", "Cammy", "Deejay", "T.Hawk", "Sagat", "M.Bison", "Zangief", "Guile", "Chun Li", "Blanka", "Guile"};
         assertEquals(solution, StreetFighter.superStreetFighterize(fighters4, position, moves));
     }
+
+
+    String[][] fighters5 = new String[][]{
+            new String[] {      "",     "Ryu",  "E.Honda",  "Cammy" },
+            new String[] {"Balrog",     "Ken",  "Chun Li",       "" },
+            new String[] {  "Vega",        "", "Fei Long", "Balrog" },
+            new String[] {"Blanka",   "Guile",         "", "Chun Li"},
+            new String[] {"M.Bison","Zangief",  "Dhalsim", "Sagat"  },
+            new String[] {"Deejay",   "Cammy",         "", "T.Hawk" }
+    };
+
+    @Test
+    public void shouldWorkWithLongerGrid5(){
+        String[] moves = new String[] {"up", "right",  "up", "up", "down", "down","down", "down", "down"};
+        int[] position = new int[] {3,1};
+        String[] solution = new String[] {"Guile", "Chun Li", "Balrog", "Balrog", "Chun Li", "Sagat", "T.Hawk", "Cammy", "Cammy"};
+        assertEquals(solution, StreetFighter.superStreetFighterize(fighters5, position, moves));
+    }
+
 }
