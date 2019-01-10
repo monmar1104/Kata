@@ -3,7 +3,7 @@ package monmar;
 public class PascalTriangle {
 
 	public static void main(String[] args) {
-		int power = 6;
+		int power = 15;
 		int[][] pascalTable = new int[power+1][power + 1];
 
 		for (int i = 0; i <= power; i++) {
